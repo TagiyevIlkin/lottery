@@ -1,28 +1,20 @@
-REMIX DEFAULT WORKSPACE
+This Solidity smart contract implements a simple decentralized lottery system on the Ethereum blockchain. The contract allows users to participate in a lottery by sending a fixed amount of ether. The manager of the lottery can pick a winner and distribute the prize based on predefined rules.
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+Key Features
+  Player Participation: Users can join the lottery by sending exactly 0.1 ether to the contract. The contract stores the addresses of all 
+  participants.
+  Manager Controls: The contract has a manager (the creator of the contract) who oversees the lottery, checks the balance, and picks the 
+  winner.
+  Random Winner Selection: A pseudo-random number is generated to select the winner. The method used is not truly random and should be 
+  replaced with a secure randomness source (e.g., an oracle) in production.
+  Prize Distribution: The winner receives 90% of the contract's balance, and the manager receives a 10% fee. After selecting the winner, the 
+  lottery is reset for the next round.
 
-This workspace contains 3 directories:
+Key Functions
+  receive(): Allows players to enter the lottery by sending exactly 0.1 ether.
+  getBalance(): Returns the current balance of the contract; only the manager can call this function.
+  random(): Generates a pseudo-random number based on blockchain data.
+  pickWinner(): Selects a winner randomly, distributes the prize, and resets the lottery; only the manager can call this function.
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
-
-SCRIPTS
-
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
-
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
-
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
-
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
-
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+Usage
+This contract provides a simple and transparent way to run a lottery on the blockchain. It ensures fairness by using the Ethereum blockchain's immutability to record all entries and distribute the prize according to predefined rules. However, note that the random number generation is not secure and should be improved for use in a real-world application.
